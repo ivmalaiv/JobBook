@@ -10,7 +10,7 @@ const CreateReport = () => {
           <p>3.Fill Report Details</p>
         </div>
         <div className="right">
-          <Search />
+          <input type="text" placeholder="search candidate"></input>
           <div className="users-container">
             <div className="single-user">
               <img
@@ -37,7 +37,7 @@ const CreateReport = () => {
           </div>
         </div>
         <div className="right">
-          <Search />
+          <input type="text" placeholder="search company"></input>
           <div className="company-container">
             <select>
               <option value="google">Google</option>

@@ -1,10 +1,10 @@
 import "./Wizard.scss";
-import HeaderBack from "../../components/HeaderBack/HeaderBack";
+import Header from "../../components/Header/Header";
 import CreateReport from "../../components/CreateReport/CreateReport";
 const Wizard = () => {
   return (
     <div className="Wizard">
-      <HeaderBack />
+      <Header />
       <CreateReport />
     </div>
   );
