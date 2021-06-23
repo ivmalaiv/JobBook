@@ -1,15 +1,24 @@
 import "./Card.scss";
-const Card = () => {
+import { Link } from "react-router-dom";
+const Card = ({ candidates }) => {
+ 
+
   return (
-    <div className="Card">
-      <img
-        src="https://assets.webiconspng.com/uploads/2016/11/avatar_business_costume_male_man_office_work_icon_628289.png"
-        alt="avatar"
-      ></img>
-      <h3>Brian Johnson</h3>
-      <p>b.johnson@gmail.com</p>
-    </div>
+    <Link to={`/report/${candidates.id}`}>
+      <div className="Card">
+        <div className="card-center">
+          <img
+            src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+            alt="avatar"
+          ></img>
+          <h3>{candidates.name}</h3>
+          <p>{candidates.email}</p>
+        </div>
+      </div>
+    </Link>
   );
 };
 
 export default Card;
+
+

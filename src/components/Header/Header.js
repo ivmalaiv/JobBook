@@ -3,7 +3,7 @@ import "./Header.scss";
 const Header = () => {
   return (
     <div className="Header">
-      <div className="HeaderBack">
+      {/* <div className="HeaderBack">
         <div className="logo">
           <h3>Admin Panel</h3>
         </div>
@@ -12,7 +12,7 @@ const Header = () => {
           <button>Create Report</button>
           <button>Log out</button>
         </div>
-      </div>
+      </div> */}
 
       <div className="HeaderFront">
         <div className="logo">

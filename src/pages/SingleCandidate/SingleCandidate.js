@@ -1,16 +1,26 @@
 import "./SingleCandidate.scss";
 import Header from "../../components/Header/Header";
-const SingleCandidate = () => {
+import { useState } from "react";
+const SingleCandidate = ({ candidates, companies, reports, match }) => {
+  
+
+  const filterCandidate = candidates?.filter((e) => e.id == match.params.id);
+  console.log(filterCandidate);
+  const filterReports = reports?.filter(
+    (e) => e.candidateId == match.params.id
+  );
+  console.log(filterReports);
+
   return (
     <div className="SingleCandidate">
       <Header />
       <div className="InterviewReport">
         <div className="person-card">
-          <img src="https://assets.webiconspng.com/uploads/2016/11/avatar_business_costume_male_man_office_work_icon_628289.png"></img>
-          <h3>Brian Johnson</h3>
-          <p>Date of birth: 01.01.1991</p>
-          <p>Email: b.johnson@gmail.com</p>
-          <p>Education: BIT</p>
+          <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"></img>
+          <h3></h3>
+          <p></p>
+          <p></p>
+          <p></p>
         </div>
         <div className="person-reports">
           <h2>Reports</h2>
@@ -24,24 +34,19 @@ const SingleCandidate = () => {
         </div>
         <div className="modular">
           <div className="modular-name">
-            <h3>Brian Johnson</h3>
+            <h3></h3>
             <button>close</button>
           </div>
           <div className="modular-wrapper">
             <div className="modular-left">
-              <p>Company:Google</p>
-              <p>Interview Date : 01.01.2022</p>
-              <p>Phase : Tech</p>
-              <p>Status : Passed</p>
+              <p></p>
+              <p></p>
+              <p></p>
+              <p></p>
             </div>
             <div className="modular-right">
               <p>Notes</p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Provident explicabo cum nobis, quaerat impedit sint illo quam
-                nam quis consequuntur. Distinctio possimus dolorum vel. Fuga
-                consectetur provident deserunt enim dignissimos?
-              </p>
+              <p></p>
             </div>
           </div>
         </div>

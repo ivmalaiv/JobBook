@@ -1,5 +1,6 @@
 import "./AdminPage.scss";
 import Header from "../../components/Header/Header";
+import SearchCard from "../../components/SearchCard/SearchCard";
 
 const AdminPage = () => {
   return (

@@ -1,5 +1,5 @@
 import "./CreateReport.scss";
-import Search from "../Search/Search";
+
 const CreateReport = () => {
   return (
     <div className="CreateReport">
