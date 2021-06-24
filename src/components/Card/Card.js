@@ -4,8 +4,9 @@ const Card = ({ candidates }) => {
  
 
   return (
-    <Link to={`/report/${candidates.id}`}>
+    
       <div className="Card">
+        
         <div className="card-center">
           <img
             src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
@@ -15,7 +16,7 @@ const Card = ({ candidates }) => {
           <p>{candidates.email}</p>
         </div>
       </div>
-    </Link>
+  
   );
 };
 
