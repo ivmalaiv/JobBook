@@ -2,16 +2,28 @@ import "./Candidates.scss";
 import { Link } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import Card from "../../components/Card/Card";
-const Candidates = ({ candidates, isToken }) => {
+import { useState } from "react";
+const Candidates = ({ candidates, setToken }) => {
+  const [search, setSearch] = useState("");
+  const filteredCandidates = candidates?.filter((e) =>
+    e.name.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <div className="Candidates">
-      <Header isToken={isToken} />
-      <input type="text" placeholder="search candidate"></input>
+      <Header setToken={setToken} />
+      <input
+        onChange={(e) => {
+          setSearch(e.target.value);
+        }}
+        type="text"
+        placeholder="search candidate"
+      ></input>
       <div className="Main">
-        {candidates.map((e) => (
+        {filteredCandidates.map((e) => (
           <>
             <Link to={`/report/${e.id}`}>
-              <Card candidates={e} />
+              <Card filteredCandidates={e} />
             </Link>
           </>
         ))}

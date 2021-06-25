@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import "./Header.scss";
 
-const Header = ({ isToken }) => {
+const Header = ({ setToken }) => {
   const logOut = () => {
     localStorage.removeItem("token");
-    isToken(false);
+    setToken(null);
   };
 
   return (

@@ -1,0 +1,13 @@
+.AdminPage {
+  min-height: 100vh;
+
+  .modular {
+    top: 25%;
+  }
+}
+.cardsContainer {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+}

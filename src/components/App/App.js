@@ -13,7 +13,8 @@ const App = () => {
   const [reports, setReports] = useState([]);
   const [users, setUsers] = useState([]);
   const [candidateId, setCandidateId] = useState("");
-  const [token, setToken] = useState(false);
+  let tokenA = localStorage?.getItem("token");
+  const [token, setToken] = useState(tokenA);
 
   useEffect(() => {
     fetch("http://localhost:3333/api/candidates")
@@ -39,35 +40,36 @@ const App = () => {
       .then((data) => setUsers(data));
   }, []);
 
-  const renderSingleCandidate = (r) => {
-    token ? (
-      <SingleCandidate
-        {...r}
-        candidates={candidates}
-        companies={companies}
-        reports={reports}
-        isToken={setToken}
-      />
-    ) : (
-      <Redirect to="/" />
-    );
-  };
-
   return (
     <div className="App">
       <Switch>
         <Route exact path="/">
           <Candidates isToken={setToken} candidates={candidates}></Candidates>
         </Route>
-        <Route path="/report/:id" render={renderSingleCandidate}></Route>
+        <Route
+          path="/report/:id"
+          render={(r) => (
+            <SingleCandidate
+              {...r}
+              candidates={candidates}
+              companies={companies}
+              reports={reports}
+              isToken={setToken}
+            />
+          )}
+        ></Route>
         <Route path="/login">
-          {token ? <Redirect to="/adminPage" /> : <Login isToken={setToken} />}
+          {token ? <Redirect to="/adminPage" /> : <Login setToken={setToken} />}
         </Route>
         <Route path="/adminPage">
-          {token ? <AdminPage isToken={setToken} /> : <Redirect to="/" />}
+          {token ? (
+            <AdminPage setToken={setToken} reports={reports} />
+          ) : (
+            <Redirect to="/" />
+          )}
         </Route>
         <Route path="/wizard">
-          {token ? <Wizard isToken={setToken} /> : <Redirect to="/" />}
+          {token ? <Wizard setToken={setToken} /> : <Redirect to="/" />}
         </Route>
       </Switch>
     </div>

@@ -1,40 +1,60 @@
 import "./AdminPage.scss";
 import Header from "../../components/Header/Header";
 import SearchCard from "../../components/SearchCard/SearchCard";
+import { useState } from "react";
 
-const AdminPage = ({ isToken }) => {
+const AdminPage = ({ setToken, reports }) => {
+  const [modular, setModular] = useState("");
+  const [search, setSearch] = useState("");
+  const filteredReports = reports.filter(
+    (e) =>
+      e.candidateName.toLowerCase().includes(search.toLowerCase()) ||
+      e.companyName.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const filteredModular = reports?.filter((e) => e.id === modular);
+  console.log(filteredModular);
+  console.log(modular);
   return (
-    <div className="AdminPage">
-      <Header isToken={isToken} />
+    <div className={!!filteredModular.length ? "AdminPage Blur" : "AdminPage"}>
+      <Header setToken={setToken} />
       <div className="ReportsAdministration">
-        <input type="text" placeholder="Search"></input>
+        <input
+          onChange={(e) => setSearch(e.target.value)}
+          type="text"
+          placeholder="Search"
+        ></input>
         <div className="cardsContainer">
-          <SearchCard />
+          {filteredReports.map((e) => (
+            <SearchCard setModular={setModular} report={e} />
+          ))}
         </div>
 
-        <div className="modular">
-          <div className="modular-name">
-            <h3>Brian Johnson</h3>
-            <button>close</button>
-          </div>
-          <div className="modular-wrapper">
-            <div className="modular-left">
-              <p>Company:Google</p>
-              <p>Interview Date : 01.01.2022</p>
-              <p>Phase : Tech</p>
-              <p>Status : Passed</p>
+        {!!filteredModular.length && (
+          <div className="modular">
+            <div className="modular-name">
+              <h3>{filteredModular[0].candidateName}</h3>
+              <button onClick={() => setModular(null)}>close</button>
             </div>
-            <div className="modular-right">
-              <p>Notes</p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Provident explicabo cum nobis, quaerat impedit sint illo quam
-                nam quis consequuntur. Distinctio possimus dolorum vel. Fuga
-                consectetur provident deserunt enim dignissimos?
-              </p>
+            <hr></hr>
+            <div className="modular-wrapper">
+              <div className="modular-left">
+                <p className="label-modular">Company</p>
+                <p>{filteredModular[0].companyName}</p>
+                <p className="label-modular">Interview Date</p>
+                <p>{filteredModular[0].interviewDate.slice(4, 16)}</p>
+                <p className="label-modular">Phase</p>
+                <p>{filteredModular[0].phase}</p>
+                <p className="label-modular">Status</p>
+                <p>{filteredModular[0].status}</p>
+              </div>
+              <div className="modular-right">
+                <p className="label-modular">Notes</p>
+                <p>{filteredModular[0].note}</p>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

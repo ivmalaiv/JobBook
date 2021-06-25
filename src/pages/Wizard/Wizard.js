@@ -1,10 +1,10 @@
 import "./Wizard.scss";
 import Header from "../../components/Header/Header";
 import CreateReport from "../../components/CreateReport/CreateReport";
-const Wizard = ({ isToken }) => {
+const Wizard = ({ setToken }) => {
   return (
     <div className="Wizard">
-      <Header isToken={isToken} />
+      <Header setToken={setToken} />
       <CreateReport />
     </div>
   );

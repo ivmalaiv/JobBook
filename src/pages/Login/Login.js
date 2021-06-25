@@ -1,7 +1,7 @@
 import "./Login.scss";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-const Login = ({ isToken }) => {
+const Login = ({ setToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
@@ -32,7 +32,7 @@ const Login = ({ isToken }) => {
         data.accessToken
           ? localStorage.setItem("token", data.accessToken)
           : setError(true);
-        data.accessToken && isToken(true);
+        data.accessToken && setToken(data.accessToken);
       });
     document.getElementById("email").value = "";
     document.getElementById("password").value = "";
