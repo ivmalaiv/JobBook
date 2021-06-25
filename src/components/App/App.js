@@ -69,7 +69,15 @@ const App = () => {
           )}
         </Route>
         <Route path="/wizard">
-          {token ? <Wizard setToken={setToken} /> : <Redirect to="/" />}
+          {token ? (
+            <Wizard
+              candidates={candidates}
+              companies={companies}
+              setToken={setToken}
+            />
+          ) : (
+            <Redirect to="/" />
+          )}
         </Route>
       </Switch>
     </div>
