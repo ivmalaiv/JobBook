@@ -7,7 +7,7 @@ const SingleCandidate = ({
   companies,
   reports,
   match,
-  isToken,
+  setToken,
 }) => {
   const [modular, setModular] = useState(null);
   const filterReports = reports?.filter(
@@ -24,7 +24,7 @@ const SingleCandidate = ({
         !!filterModular.length ? "SingleCandidate Blur" : "SingleCandidate"
       }
     >
-      <Header isToken={isToken} />
+      <Header setToken={setToken} />
       <div className="InterviewReport">
         {!!filterCandidate.length && (
           <div className="person-card">

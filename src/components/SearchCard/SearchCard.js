@@ -1,5 +1,17 @@
 import "./SearchCard.scss";
-const SearchCard = ({ report, setModular }) => {
+const SearchCard = ({ report, setModular, setReports, reports }) => {
+
+
+  
+  const deleteReport = () => {
+    fetch(`http://localhost:3333/api/reports/${report.id}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then(() => setReports([...reports.filter((e) => e.id != report.id)]));
+  };
+
+
+
   return (
     <div className="SearchCard">
       <div>
@@ -20,7 +32,7 @@ const SearchCard = ({ report, setModular }) => {
       </div>
       <div className="button-container">
         <button onClick={() => setModular(report.id)}>View More</button>
-        <button>Delete</button>
+        <button onClick={deleteReport}>Delete</button>
       </div>
     </div>
   );

@@ -1,9 +1,26 @@
 import { useState } from "react";
 import "./CreateReport.scss";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
-const CreateReport = ({ candidates, companies }) => {
+const CreateReport = ({ candidates, companies, setReports, reports }) => {
   const [phase, setPhase] = useState(1);
+  const [user, setUser] = useState({});
+  const [date, setDate] = useState(new Date());
+  const [toggle, setToggle] = useState("");
 
+  const submitReport = () => {
+    fetch("http://localhost:3333/api/reports", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => setReports([...reports, data]));
+  };
   return (
     <div className="CreateReport">
       {phase == 1 && (
@@ -27,7 +44,18 @@ const CreateReport = ({ candidates, companies }) => {
             <input type="text" placeholder="search candidate"></input>
             <div className="users-container">
               {candidates.map((e) => (
-                <div className="single-user">
+                <div
+                  className={`single-user ${
+                    user.candidateId === e.id ? "selected-single-user" : ""
+                  }`}
+                  onClick={() => {
+                    setUser({
+                      ...user,
+                      candidateId: e.id,
+                      candidateName: e.name,
+                    });
+                  }}
+                >
                   <div className="single-user-wrapper">
                     <img
                       src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
@@ -62,7 +90,7 @@ const CreateReport = ({ candidates, companies }) => {
 
             <hr></hr>
             <div className="selected">
-              <p>Candidate: John Doe</p>
+              <p>Candidate: {user.candidateName}</p>
             </div>
           </div>
           <div className="right">
@@ -70,7 +98,13 @@ const CreateReport = ({ candidates, companies }) => {
             <div className="company-container">
               <ul>
                 {companies.map((e) => (
-                  <li>{e.name}</li>
+                  <li
+                    onClick={() =>
+                      setUser({ ...user, companyId: e.id, companyName: e.name })
+                    }
+                  >
+                    {e.name}
+                  </li>
                 ))}
               </ul>
             </div>
@@ -100,20 +134,29 @@ const CreateReport = ({ candidates, companies }) => {
 
             <hr></hr>
             <div className="selected">
-              <p>Candidate: John Doe</p>
-              <p>Company:Google</p>
+              <p>Candidate: {user.candidateName}</p>
+              <p>Company: {user.companyName}</p>
             </div>
           </div>
           <div className="right">
             <div className="inputs-container">
               <div className="interview-date-container">
                 <p>Interview Date:</p>
-                <input type="date" />
+                <DatePicker
+                  selected={date}
+                  maxDate={Date.now()}
+                  onChange={(date) => {
+                    setDate(date);
+                    setUser({ ...user, interviewDate: `${date}` });
+                  }}
+                />
               </div>
 
               <div className="interview-phase-container">
                 <p>Phase:</p>
-                <select>
+                <select
+                  onClick={(e) => setUser({ ...user, phase: e.target.value })}
+                >
                   <option value="cv">CV</option>
                   <option value="hr">HR</option>
                   <option value="tech">Tech</option>
@@ -123,7 +166,9 @@ const CreateReport = ({ candidates, companies }) => {
 
               <div className="interview-status-container">
                 <p>Status:</p>
-                <select>
+                <select
+                  onClick={(e) => setUser({ ...user, status: e.target.value })}
+                >
                   <option value="passed">Passed</option>
                   <option value="declined">Declined</option>
                 </select>
@@ -132,12 +177,14 @@ const CreateReport = ({ candidates, companies }) => {
 
             <div className="notes">
               <p>Notes:</p>
-              <textarea></textarea>
+              <textarea
+                onChange={(e) => setUser({ ...user, note: e.target.value })}
+              ></textarea>
             </div>
 
             <div className="btn-container">
               <button onClick={() => setPhase(2)}>Back</button>
-              <button>Submit</button>
+              <button onClick={submitReport}>Submit</button>
             </div>
           </div>
         </div>

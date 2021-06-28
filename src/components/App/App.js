@@ -15,6 +15,8 @@ const App = () => {
   const [candidateId, setCandidateId] = useState("");
   let tokenA = localStorage?.getItem("token");
   const [token, setToken] = useState(tokenA);
+  // const [reRender, setReRender] = useState(null);
+  console.log(reports);
 
   useEffect(() => {
     fetch("http://localhost:3333/api/candidates")
@@ -54,7 +56,7 @@ const App = () => {
               candidates={candidates}
               companies={companies}
               reports={reports}
-              isToken={setToken}
+              setToken={setToken}
             />
           )}
         ></Route>
@@ -63,7 +65,11 @@ const App = () => {
         </Route>
         <Route path="/adminPage">
           {token ? (
-            <AdminPage setToken={setToken} reports={reports} />
+            <AdminPage
+              setToken={setToken}
+              reports={reports}
+              setReports={setReports}
+            />
           ) : (
             <Redirect to="/" />
           )}
@@ -71,6 +77,8 @@ const App = () => {
         <Route path="/wizard">
           {token ? (
             <Wizard
+              reports={reports}
+              setReports={setReports}
               candidates={candidates}
               companies={companies}
               setToken={setToken}

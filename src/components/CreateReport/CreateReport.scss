@@ -119,6 +119,9 @@
   justify-content: space-between;
   .interview-date-container {
     width: 26%;
+    input {
+      margin: 0;
+    }
   }
   .interview-phase-container {
     width: 26%;
@@ -143,4 +146,27 @@
     outline: none;
     border-radius: 10px;
   }
+}
+.react-datepicker-ignore-onclickoutside {
+  margin: 0;
+}
+
+button.react-datepicker__navigation.react-datepicker__navigation--previous {
+  width: 3px;
+  height: 5px;
+  margin-top: 8px;
+  clip-path: polygon(80% 0, 0 50%, 80% 100%);
+  background-color: rgb(213, 200, 77);
+  margin-right: 5px;
+}
+button.react-datepicker__navigation.react-datepicker__navigation--next {
+  width: 3px;
+  height: 5px;
+  margin-top: 8px;
+  clip-path: polygon(20% 0, 100% 50%, 20% 100%);
+  background-color: rgb(213, 200, 77);
+  margin-right: 5px;
+}
+.selected-single-user {
+  background-color: red !important;
 }

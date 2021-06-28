@@ -3,7 +3,7 @@ import Header from "../../components/Header/Header";
 import SearchCard from "../../components/SearchCard/SearchCard";
 import { useState } from "react";
 
-const AdminPage = ({ setToken, reports }) => {
+const AdminPage = ({ setToken, reports, setReports }) => {
   const [modular, setModular] = useState("");
   const [search, setSearch] = useState("");
   const filteredReports = reports.filter(
@@ -26,7 +26,12 @@ const AdminPage = ({ setToken, reports }) => {
         ></input>
         <div className="cardsContainer">
           {filteredReports.map((e) => (
-            <SearchCard setModular={setModular} report={e} />
+            <SearchCard
+              reports={reports}
+              setReports={setReports}
+              setModular={setModular}
+              report={e}
+            />
           ))}
         </div>
 
