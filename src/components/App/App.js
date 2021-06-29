@@ -46,7 +46,7 @@ const App = () => {
     <div className="App">
       <Switch>
         <Route exact path="/">
-          <Candidates isToken={setToken} candidates={candidates}></Candidates>
+          <Candidates setToken={setToken} candidates={candidates}></Candidates>
         </Route>
         <Route
           path="/report/:id"

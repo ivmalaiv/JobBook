@@ -2,7 +2,16 @@
   min-height: 100vh;
 
   .modular {
-    top: 25%;
+    position: fixed;
+    top: 35%;
+    @media screen and (max-width: 1000px) {
+      font-size: 14px;
+      top: 15%;
+    }
+    @media screen and (max-width: 700px) {
+      font-size: 10px;
+      top: 15%;
+    }
   }
 }
 .cardsContainer {

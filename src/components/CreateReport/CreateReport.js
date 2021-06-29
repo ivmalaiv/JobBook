@@ -2,12 +2,25 @@ import { useState } from "react";
 import "./CreateReport.scss";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { Link } from "react-router-dom";
 
 const CreateReport = ({ candidates, companies, setReports, reports }) => {
   const [phase, setPhase] = useState(1);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({
+    interviewDate: `${new Date()}`,
+    phase: "",
+    status: "",
+    note: "",
+  });
   const [date, setDate] = useState(new Date());
-  const [toggle, setToggle] = useState("");
+  const [searchCandidates, setSearchCandidates] = useState("");
+  const [searchCompany, setSearchCompany] = useState("");
+  const filteredCandidates = candidates?.filter((e) =>
+    e.name.toLowerCase().includes(searchCandidates.toLowerCase())
+  );
+  const filteredCompanies = companies?.filter((e) =>
+    e.name.toLowerCase().includes(searchCompany.toLowerCase())
+  );
 
   const submitReport = () => {
     fetch("http://localhost:3333/api/reports", {
@@ -41,12 +54,18 @@ const CreateReport = ({ candidates, companies, setReports, reports }) => {
             <div className="selected"></div>
           </div>
           <div className="right">
-            <input type="text" placeholder="search candidate"></input>
+            <input
+              type="text"
+              placeholder="search candidate"
+              onChange={(e) => {
+                setSearchCandidates(e.target.value);
+              }}
+            ></input>
             <div className="users-container">
-              {candidates.map((e) => (
+              {filteredCandidates.map((e) => (
                 <div
                   className={`single-user ${
-                    user.candidateId === e.id ? "selected-single-user" : ""
+                    user.candidateId === e.id ? "selected-report-property" : ""
                   }`}
                   onClick={() => {
                     setUser({
@@ -67,7 +86,9 @@ const CreateReport = ({ candidates, companies, setReports, reports }) => {
                 </div>
               ))}
             </div>
-            <button onClick={() => setPhase(2)}>Next</button>
+            <button onClick={() => user.candidateName && setPhase(2)}>
+              Next
+            </button>
           </div>
         </div>
       )}
@@ -94,11 +115,20 @@ const CreateReport = ({ candidates, companies, setReports, reports }) => {
             </div>
           </div>
           <div className="right">
-            <input type="text" placeholder="search company"></input>
+            <input
+              type="text"
+              placeholder="search company"
+              onChange={(e) => {
+                setSearchCompany(e.target.value);
+              }}
+            ></input>
             <div className="company-container">
               <ul>
-                {companies.map((e) => (
+                {filteredCompanies.map((e) => (
                   <li
+                    className={`${
+                      user.companyId === e.id ? "selected-report-property" : ""
+                    }`}
                     onClick={() =>
                       setUser({ ...user, companyId: e.id, companyName: e.name })
                     }
@@ -110,7 +140,9 @@ const CreateReport = ({ candidates, companies, setReports, reports }) => {
             </div>
             <div className="btn-container">
               <button onClick={() => setPhase(1)}>Back</button>
-              <button onClick={() => setPhase(3)}>Next</button>
+              <button onClick={() => user.companyName && setPhase(3)}>
+                Next
+              </button>
             </div>
           </div>
         </div>
@@ -147,7 +179,10 @@ const CreateReport = ({ candidates, companies, setReports, reports }) => {
                   maxDate={Date.now()}
                   onChange={(date) => {
                     setDate(date);
-                    setUser({ ...user, interviewDate: `${date}` });
+                    setUser({
+                      ...user,
+                      interviewDate: `${date}`,
+                    });
                   }}
                 />
               </div>
@@ -184,7 +219,9 @@ const CreateReport = ({ candidates, companies, setReports, reports }) => {
 
             <div className="btn-container">
               <button onClick={() => setPhase(2)}>Back</button>
-              <button onClick={submitReport}>Submit</button>
+              <Link to="/adminPage">
+                <button onClick={submitReport}>Submit</button>
+              </Link>
             </div>
           </div>
         </div>

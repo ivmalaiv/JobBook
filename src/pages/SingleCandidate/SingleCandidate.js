@@ -2,13 +2,7 @@ import "./SingleCandidate.scss";
 import Header from "../../components/Header/Header";
 import { useEffect, useState } from "react";
 
-const SingleCandidate = ({
-  candidates,
-  companies,
-  reports,
-  match,
-  setToken,
-}) => {
+const SingleCandidate = ({ candidates, reports, match, setToken }) => {
   const [modular, setModular] = useState(null);
   const filterReports = reports?.filter(
     (e) => e.candidateId == match.params.id

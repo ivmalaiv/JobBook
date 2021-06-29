@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import Card from "../../components/Card/Card";
 import { useState } from "react";
+import uuid from "react-uuid";
 const Candidates = ({ candidates, setToken }) => {
   const [search, setSearch] = useState("");
   const filteredCandidates = candidates?.filter((e) =>
@@ -23,7 +24,7 @@ const Candidates = ({ candidates, setToken }) => {
         {filteredCandidates.map((e) => (
           <>
             <Link to={`/report/${e.id}`}>
-              <Card filteredCandidates={e} />
+              <Card key={uuid()} filteredCandidates={e} />
             </Link>
           </>
         ))}

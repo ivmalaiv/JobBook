@@ -1,16 +1,11 @@
 import "./SearchCard.scss";
 const SearchCard = ({ report, setModular, setReports, reports }) => {
-
-
-  
   const deleteReport = () => {
     fetch(`http://localhost:3333/api/reports/${report.id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }).then(() => setReports([...reports.filter((e) => e.id != report.id)]));
   };
-
-
 
   return (
     <div className="SearchCard">

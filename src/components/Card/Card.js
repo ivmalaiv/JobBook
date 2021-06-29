@@ -1,5 +1,5 @@
 import "./Card.scss";
-import { Link } from "react-router-dom";
+
 const Card = ({ filteredCandidates }) => {
   return (
     <div className="Card">

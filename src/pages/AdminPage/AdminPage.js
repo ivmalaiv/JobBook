@@ -2,6 +2,7 @@ import "./AdminPage.scss";
 import Header from "../../components/Header/Header";
 import SearchCard from "../../components/SearchCard/SearchCard";
 import { useState } from "react";
+import uuid from "react-uuid";
 
 const AdminPage = ({ setToken, reports, setReports }) => {
   const [modular, setModular] = useState("");
@@ -27,6 +28,7 @@ const AdminPage = ({ setToken, reports, setReports }) => {
         <div className="cardsContainer">
           {filteredReports.map((e) => (
             <SearchCard
+              key={uuid()}
               reports={reports}
               setReports={setReports}
               setModular={setModular}

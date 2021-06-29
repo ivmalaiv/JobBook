@@ -12,6 +12,9 @@
     text-align: center;
     padding-top: 20px;
     padding-bottom: 20px;
+    @media screen and (max-width: 700px) {
+      width: 80%;
+    }
     button {
       text-align: center;
       justify-content: center;
@@ -25,11 +28,17 @@
       margin: 10px auto;
       border: 1px solid rgba(255, 255, 255, 0.5);
     }
+    button:hover {
+      background-color: #d5c84d;
+    }
     input {
       border-style: none;
       outline: none;
       width: 50%;
       box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.3);
+      @media screen and (max-width: 700px) {
+        width: 80%;
+      }
     }
   }
 }

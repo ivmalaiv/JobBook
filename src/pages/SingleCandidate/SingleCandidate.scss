@@ -1,3 +1,6 @@
+.SingleCandidate {
+  min-height: 100vh;
+}
 .person-card {
   display: flex;
   justify-content: center;
@@ -13,13 +16,25 @@
   width: 26%;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   border-left: 1px solid rgba(255, 255, 255, 0.2);
+  @media screen and (max-width: 1000px) {
+    width: 45%;
+    height: 390px;
+  }
+  @media screen and (max-width: 700px) {
+    width: 80%;
+    height: 390px;
+  }
 
   img {
-    width: 50%;
+    width: 150px;
+    height: 140px;
     border-radius: 50%;
   }
   p {
     font-size: 12px;
+    @media screen and (max-width: 1000px) {
+      font-size: 14px;
+    }
   }
   span {
     color: #d5c84d;
@@ -42,12 +57,21 @@
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   border-left: 1px solid rgba(255, 255, 255, 0.2);
   padding-bottom: 20px;
+  h2 {
+    @media screen and (max-width: 700px) {
+      font-size: 15px;
+    }
+  }
   table {
     border: 1px solid rgba(255, 255, 255, 0.5);
     margin: 0 auto;
     width: 80%;
     border-collapse: collapse;
     background-color: rgba(255, 255, 255, 0.1);
+    @media screen and (max-width: 700px) {
+      width: 90%;
+      font-size: 11px;
+    }
     th {
       color: #d5c84d;
       border: 1px solid rgba(255, 255, 255, 0.5);
@@ -69,6 +93,9 @@
       margin: 0 auto;
       font-size: 10px;
     }
+    button:hover {
+      background-color: #d5c84d;
+    }
   }
 }
 
@@ -83,12 +110,33 @@
   background-color: rgb(55, 117, 114);
   z-index: 2;
 
+  @media screen and (max-width: 1000px) {
+    font-size: 16px;
+    top: 15%;
+    width: 70%;
+    left: 15%;
+  }
+  @media screen and (max-width: 700px) {
+    font-size: 10px;
+    top: 15%;
+    width: 70%;
+    left: 15%;
+  }
+
   .modular-name {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0px 20px;
     height: 60px;
+    @media screen and (max-width: 700px) {
+      width: 100%;
+    }
+    h3 {
+      @media screen and (max-width: 700px) {
+        font-size: 16px;
+      }
+    }
 
     button {
       margin-bottom: 0;
@@ -98,6 +146,10 @@
   .modular-wrapper {
     display: flex;
     padding: 20px;
+    @media screen and (max-width: 700px) {
+      flex-direction: column;
+      width: 100%;
+    }
 
     p {
       margin-bottom: 6px;
@@ -118,24 +170,33 @@
   .modular-right {
     width: 80%;
     margin: 0 auto;
+    @media screen and (max-width: 700px) {
+      margin: 0;
+    }
   }
 
   .modular-left {
     border-right: 1px solid rgba(255, 255, 255, 0.5);
     margin-right: 10px;
+
+    @media screen and (max-width: 700px) {
+      border: none;
+    }
   }
 
   button {
     text-align: center;
     justify-content: center;
     color: white;
-    box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
     padding: 5px 15px;
     display: block;
     border-radius: 5px;
     border-style: none;
     background-color: transparent;
     border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+  button:hover {
+    background-color: #d5c84d;
   }
 }
 

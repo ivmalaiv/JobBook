@@ -4,6 +4,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media screen and (max-width: 700px) {
+    flex-direction: column;
+  }
 
   a {
     h3 {
@@ -25,6 +28,9 @@
     background-color: transparent;
     border: 1px solid rgba(255, 255, 255, 0.5);
   }
+  button:hover {
+    background-color: #d5c84d;
+  }
 }
 .HeaderBack {
   color: white;
@@ -32,6 +38,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media screen and (max-width: 700px) {
+    flex-direction: column;
+  }
   .button-wrapper {
     display: flex;
     justify-content: space-between;
@@ -50,6 +59,11 @@
     background-color: transparent;
     border: 1px solid rgba(255, 255, 255, 0.5);
   }
+
+  button:hover {
+    background-color: #d5c84d;
+  }
+
   a {
     margin-left: 15px;
     &:nth-child(3) {
