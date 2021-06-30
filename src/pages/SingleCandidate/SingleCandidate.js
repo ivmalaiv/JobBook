@@ -1,6 +1,7 @@
 import "./SingleCandidate.scss";
 import Header from "../../components/Header/Header";
 import { useState } from "react";
+import uuid from "react-uuid";
 
 const SingleCandidate = ({ candidates, reports, match, setToken }) => {
   const [modular, setModular] = useState(null);
@@ -49,29 +50,33 @@ const SingleCandidate = ({ candidates, reports, match, setToken }) => {
         <div className="person-reports">
           <h2>Reports</h2>
           <table>
-            <tr>
-              <th>Company</th>
-              <th>Interview Date</th>
-              <th colSpan="2">Status</th>
-            </tr>
-            {filterReports.map((e) => {
-              return (
-                <tr>
-                  <td>{e.companyName}</td>
-                  <td>{e.interviewDate.slice(4, 16)}</td>
-                  <td>{e.status}</td>
-                  <td>
-                    <button
-                      onClick={() => {
-                        setModular(e.id);
-                      }}
-                    >
-                      More
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
+            <thead>
+              <tr>
+                <th>Company</th>
+                <th>Interview Date</th>
+                <th colSpan="2">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filterReports.map((e) => {
+                return (
+                  <tr key={uuid()}>
+                    <td>{e.companyName}</td>
+                    <td>{e.interviewDate.slice(4, 16)}</td>
+                    <td>{e.status}</td>
+                    <td>
+                      <button
+                        onClick={() => {
+                          setModular(e.id);
+                        }}
+                      >
+                        More
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
           </table>
         </div>
         {!!filterModular.length && (

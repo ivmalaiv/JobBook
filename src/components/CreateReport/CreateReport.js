@@ -3,6 +3,7 @@ import "./CreateReport.scss";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
+import uuid from "react-uuid";
 
 const CreateReport = ({ candidates, companies, setReports, reports }) => {
   const [phase, setPhase] = useState(1);
@@ -66,6 +67,7 @@ const CreateReport = ({ candidates, companies, setReports, reports }) => {
             <div className="users-container">
               {filteredCandidates.map((e) => (
                 <div
+                  key={uuid()}
                   className={`single-user ${
                     user.candidateId === e.id ? "selected-report-property" : ""
                   }`}
@@ -139,12 +141,12 @@ const CreateReport = ({ candidates, companies, setReports, reports }) => {
                   </li>
                 ))}
               </ul>
-            </div>
-            <div className="btn-container">
-              <button onClick={() => setPhase(1)}>Back</button>
-              <button onClick={() => user.companyName && setPhase(3)}>
-                Next
-              </button>
+              <div className="btn-container">
+                <button onClick={() => setPhase(1)}>Back</button>
+                <button onClick={() => user.companyName && setPhase(3)}>
+                  Next
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -217,13 +219,12 @@ const CreateReport = ({ candidates, companies, setReports, reports }) => {
               <textarea
                 onChange={(e) => setUser({ ...user, note: e.target.value })}
               ></textarea>
-            </div>
-
-            <div className="btn-container">
-              <button onClick={() => setPhase(2)}>Back</button>
-              <Link to="/adminPage">
-                <button onClick={submitReport}>Submit</button>
-              </Link>
+              <div className="btn-container">
+                <button onClick={() => setPhase(2)}>Back</button>
+                <Link to="/adminPage">
+                  <button onClick={submitReport}>Submit</button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
