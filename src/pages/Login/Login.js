@@ -1,18 +1,16 @@
 import "./Login.scss";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 const Login = ({ setToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
 
-  const getEmail = (e) => {
-    // console.log(e.target.value);
+  const getEmail = (e) => { 
     setEmail(e.target.value);
   };
 
   const getPassword = (e) => {
-    // console.log(e.target.value);
     setPassword(e.target.value);
   };
 

@@ -4,8 +4,10 @@ import Header from "../../components/Header/Header";
 import Card from "../../components/Card/Card";
 import { useState } from "react";
 import uuid from "react-uuid";
+
 const Candidates = ({ candidates, setToken }) => {
   const [search, setSearch] = useState("");
+
   const filteredCandidates = candidates?.filter((e) =>
     e.name.toLowerCase().includes(search.toLowerCase())
   );
@@ -24,7 +26,7 @@ const Candidates = ({ candidates, setToken }) => {
         {filteredCandidates.map((e) => (
           <>
             <Link to={`/report/${e.id}`}>
-              <Card key={uuid()} filteredCandidates={e} />
+              <Card key={uuid()} filteredCandidate={e} />
             </Link>
           </>
         ))}

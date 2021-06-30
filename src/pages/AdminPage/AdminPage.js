@@ -7,6 +7,7 @@ import uuid from "react-uuid";
 const AdminPage = ({ setToken, reports, setReports }) => {
   const [modular, setModular] = useState("");
   const [search, setSearch] = useState("");
+  
   const filteredReports = reports.filter(
     (e) =>
       e.candidateName.toLowerCase().includes(search.toLowerCase()) ||
@@ -14,8 +15,7 @@ const AdminPage = ({ setToken, reports, setReports }) => {
   );
 
   const filteredModular = reports?.filter((e) => e.id === modular);
-  console.log(filteredModular);
-  console.log(modular);
+  
   return (
     <div className={!!filteredModular.length ? "AdminPage Blur" : "AdminPage"}>
       <Header setToken={setToken} />

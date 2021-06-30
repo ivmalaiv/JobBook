@@ -9,12 +9,13 @@ const CreateReport = ({ candidates, companies, setReports, reports }) => {
   const [user, setUser] = useState({
     interviewDate: `${new Date()}`,
     phase: "",
-    status: "",
+    status: "no status",
     note: "",
   });
   const [date, setDate] = useState(new Date());
   const [searchCandidates, setSearchCandidates] = useState("");
   const [searchCompany, setSearchCompany] = useState("");
+
   const filteredCandidates = candidates?.filter((e) =>
     e.name.toLowerCase().includes(searchCandidates.toLowerCase())
   );
@@ -34,9 +35,10 @@ const CreateReport = ({ candidates, companies, setReports, reports }) => {
       .then((res) => res.json())
       .then((data) => setReports([...reports, data]));
   };
+
   return (
     <div className="CreateReport">
-      {phase == 1 && (
+      {phase === 1 && (
         <div className="wizard-candidates" id="select-candidate">
           <div className="left">
             <div className="select-wrapper">
@@ -93,7 +95,7 @@ const CreateReport = ({ candidates, companies, setReports, reports }) => {
         </div>
       )}
 
-      {phase == 2 && (
+      {phase === 2 && (
         <div className="wizard-candidates" id="select-company">
           <div className="left">
             <div className="select-wrapper">
@@ -148,7 +150,7 @@ const CreateReport = ({ candidates, companies, setReports, reports }) => {
         </div>
       )}
 
-      {phase == 3 && (
+      {phase === 3 && (
         <div className="wizard-candidates" id="fill-report ">
           <div className="left">
             <div className="select-wrapper">

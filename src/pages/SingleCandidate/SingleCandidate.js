@@ -1,16 +1,16 @@
 import "./SingleCandidate.scss";
 import Header from "../../components/Header/Header";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const SingleCandidate = ({ candidates, reports, match, setToken }) => {
   const [modular, setModular] = useState(null);
+
   const filterReports = reports?.filter(
     (e) => e.candidateId == match.params.id
   );
-
-  const filterModular = filterReports?.filter((e) => e.id == modular);
-
   const filterCandidate = candidates?.filter((e) => e.id == match.params.id);
+
+  const filterModular = filterReports?.filter((e) => e.id === modular);
 
   return (
     <div
@@ -23,7 +23,10 @@ const SingleCandidate = ({ candidates, reports, match, setToken }) => {
         {!!filterCandidate.length && (
           <div className="person-card">
             <div className="person-card-center">
-              <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"></img>
+              <img
+                src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                alt=""
+              ></img>
               <h3>{filterCandidate[0].name}</h3>
               <div>
                 <p>
