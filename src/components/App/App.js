@@ -6,6 +6,7 @@ import AdminPage from "../../pages/AdminPage/AdminPage";
 import Wizard from "../../pages/Wizard/Wizard";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { TokenProvider } from "../../context";
 
 const App = () => {
   const [candidates, setCandidates] = useState([]);
@@ -26,50 +27,46 @@ const App = () => {
   }, []);
 
   return (
-    <div className="App">
-      <Switch>
-        <Route exact path="/">
-          <Candidates setToken={setToken} candidates={candidates}></Candidates>
-        </Route>
-        <Route
-          path="/report/:id"
-          render={(r) => (
-            <SingleCandidate
-              {...r}
-              candidates={candidates}
-              reports={reports}
-              setToken={setToken}
-            />
-          )}
-        ></Route>
-        <Route path="/login">
-          {token ? <Redirect to="/adminPage" /> : <Login setToken={setToken} />}
-        </Route>
-        <Route path="/adminPage">
-          {token ? (
-            <AdminPage
-              setToken={setToken}
-              reports={reports}
-              setReports={setReports}
-            />
-          ) : (
-            <Redirect to="/" />
-          )}
-        </Route>
-        <Route path="/wizard">
-          {token ? (
-            <Wizard
-              reports={reports}
-              setReports={setReports}
-              candidates={candidates}
-              setToken={setToken}
-            />
-          ) : (
-            <Redirect to="/" />
-          )}
-        </Route>
-      </Switch>
-    </div>
+    <TokenProvider value={setToken}>
+      <div className="App">
+        <Switch>
+          <Route exact path="/">
+            <Candidates candidates={candidates}></Candidates>
+          </Route>
+          <Route
+            path="/report/:id"
+            render={(r) => (
+              <SingleCandidate
+                {...r}
+                candidates={candidates}
+                reports={reports}
+              />
+            )}
+          ></Route>
+          <Route path="/login">
+            {token ? <Redirect to="/adminPage" /> : <Login />}
+          </Route>
+          <Route path="/adminPage">
+            {token ? (
+              <AdminPage reports={reports} setReports={setReports} />
+            ) : (
+              <Redirect to="/" />
+            )}
+          </Route>
+          <Route path="/wizard">
+            {token ? (
+              <Wizard
+                reports={reports}
+                setReports={setReports}
+                candidates={candidates}
+              />
+            ) : (
+              <Redirect to="/" />
+            )}
+          </Route>
+        </Switch>
+      </div>
+    </TokenProvider>
   );
 };
 export default App;

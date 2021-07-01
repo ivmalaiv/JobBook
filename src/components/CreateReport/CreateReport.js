@@ -7,7 +7,7 @@ import uuid from "react-uuid";
 
 const CreateReport = ({ candidates, companies, setReports, reports }) => {
   const [phase, setPhase] = useState(1);
-  const [user, setUser] = useState({
+  const [newReport, setNewReport] = useState({
     interviewDate: `${new Date()}`,
     phase: "",
     status: "no status",
@@ -31,7 +31,7 @@ const CreateReport = ({ candidates, companies, setReports, reports }) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      body: JSON.stringify(user),
+      body: JSON.stringify(newReport),
     })
       .then((res) => res.json())
       .then((data) => setReports([...reports, data]));
@@ -69,11 +69,13 @@ const CreateReport = ({ candidates, companies, setReports, reports }) => {
                 <div
                   key={uuid()}
                   className={`single-user ${
-                    user.candidateId === e.id ? "selected-report-property" : ""
+                    newReport.candidateId === e.id
+                      ? "selected-report-property"
+                      : ""
                   }`}
                   onClick={() => {
-                    setUser({
-                      ...user,
+                    setNewReport({
+                      ...newReport,
                       candidateId: e.id,
                       candidateName: e.name,
                     });
@@ -90,7 +92,7 @@ const CreateReport = ({ candidates, companies, setReports, reports }) => {
                 </div>
               ))}
             </div>
-            <button onClick={() => user.candidateName && setPhase(2)}>
+            <button onClick={() => newReport.candidateName && setPhase(2)}>
               Next
             </button>
           </div>
@@ -115,7 +117,7 @@ const CreateReport = ({ candidates, companies, setReports, reports }) => {
 
             <hr></hr>
             <div className="selected">
-              <p>Candidate: {user.candidateName}</p>
+              <p>Candidate: {newReport.candidateName}</p>
             </div>
           </div>
           <div className="right">
@@ -131,10 +133,16 @@ const CreateReport = ({ candidates, companies, setReports, reports }) => {
                 {filteredCompanies.map((e) => (
                   <li
                     className={`${
-                      user.companyId === e.id ? "selected-report-property" : ""
+                      newReport.companyId === e.id
+                        ? "selected-report-property"
+                        : ""
                     }`}
                     onClick={() =>
-                      setUser({ ...user, companyId: e.id, companyName: e.name })
+                      setNewReport({
+                        ...newReport,
+                        companyId: e.id,
+                        companyName: e.name,
+                      })
                     }
                   >
                     {e.name}
@@ -143,7 +151,7 @@ const CreateReport = ({ candidates, companies, setReports, reports }) => {
               </ul>
               <div className="btn-container">
                 <button onClick={() => setPhase(1)}>Back</button>
-                <button onClick={() => user.companyName && setPhase(3)}>
+                <button onClick={() => newReport.companyName && setPhase(3)}>
                   Next
                 </button>
               </div>
@@ -170,8 +178,8 @@ const CreateReport = ({ candidates, companies, setReports, reports }) => {
 
             <hr></hr>
             <div className="selected">
-              <p>Candidate: {user.candidateName}</p>
-              <p>Company: {user.companyName}</p>
+              <p>Candidate: {newReport.candidateName}</p>
+              <p>Company: {newReport.companyName}</p>
             </div>
           </div>
           <div className="right">
@@ -183,8 +191,8 @@ const CreateReport = ({ candidates, companies, setReports, reports }) => {
                   maxDate={Date.now()}
                   onChange={(date) => {
                     setDate(date);
-                    setUser({
-                      ...user,
+                    setNewReport({
+                      ...newReport,
                       interviewDate: `${date}`,
                     });
                   }}
@@ -194,7 +202,9 @@ const CreateReport = ({ candidates, companies, setReports, reports }) => {
               <div className="interview-phase-container">
                 <p>Phase:</p>
                 <select
-                  onClick={(e) => setUser({ ...user, phase: e.target.value })}
+                  onClick={(e) =>
+                    setNewReport({ ...newReport, phase: e.target.value })
+                  }
                 >
                   <option value="cv">CV</option>
                   <option value="hr">HR</option>
@@ -206,7 +216,9 @@ const CreateReport = ({ candidates, companies, setReports, reports }) => {
               <div className="interview-status-container">
                 <p>Status:</p>
                 <select
-                  onClick={(e) => setUser({ ...user, status: e.target.value })}
+                  onClick={(e) =>
+                    setNewReport({ ...newReport, status: e.target.value })
+                  }
                 >
                   <option value="passed">Passed</option>
                   <option value="declined">Declined</option>
@@ -217,7 +229,9 @@ const CreateReport = ({ candidates, companies, setReports, reports }) => {
             <div className="notes">
               <p>Notes:</p>
               <textarea
-                onChange={(e) => setUser({ ...user, note: e.target.value })}
+                onChange={(e) =>
+                  setNewReport({ ...newReport, note: e.target.value })
+                }
               ></textarea>
               <div className="btn-container">
                 <button onClick={() => setPhase(2)}>Back</button>

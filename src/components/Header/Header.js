@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { tokenContext } from "../../context";
 import "./Header.scss";
 
-const Header = ({ setToken }) => {
+const Header = () => {
+  const setToken = useContext(tokenContext);
+
   const logOut = () => {
     localStorage.removeItem("token");
     setToken(null);
